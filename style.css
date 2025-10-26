@@ -1,0 +1,370 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  background-color: #F9F7D3;
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  bottom: -200px;
+  right: -250px;
+  width: 800px;
+  height: 800px;
+  background: url('img/back-logo.png') no-repeat center/contain;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: -1;
+}
+
+a {
+  text-decoration: none;
+  color: #592507;
+  font-weight: 600;
+}
+
+/* --- Header e Navbar --- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.navbar {
+  background-color: rgba(89, 37, 7, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 0 0 18px 18px;
+  padding: 10px 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-logo .circle {
+  height: 60px;
+  width: 60px;
+}
+
+#name {
+  font-weight: 700;
+  color: #F9F7D3;
+  font-size: 16px;
+}
+
+.navbar-toggler {
+  display: block;
+  background: none;
+  border: none;
+  color: #F9F7D3;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.navbar-options {
+  display: none;
+  width: 100%;
+  background-color: rgba(89, 37, 7, 0.9);
+  border-radius: 0 0 18px 18px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+}
+
+.navbar-options.active {
+  display: block;
+}
+
+.navbar-options ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 10px 0;
+  gap: 5px;
+  align-items: center;
+  position: relative;
+}
+
+.navbar-options ul li {
+  padding: 10px 15px;
+  border-radius: 10px;
+  white-space: nowrap;
+  transition: box-shadow 0.3s ease;
+  width: 90%;
+  text-align: center;
+}
+
+.navbar-options ul li:hover {
+  background-color: rgba(242, 235, 133, 0.5);
+  cursor: pointer;
+}
+
+.navbar-options ul li.active {
+  background-color: rgba(242, 235, 133, 0.9);
+  font-weight: 700;
+}
+
+.navbar-options ul .nav-link {
+  color: #F9F7D3;
+}
+
+.active-line {
+    display: none;
+}
+
+/* --- ESTILO DOS CONTAINERS --- */
+.content-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  box-sizing: border-box;
+  color: #592507;
+  /* Prepara a seção para a animação */
+  overflow: hidden; /* Evita que elementos de animação "vazem" */
+}
+
+#home-section {
+  background-color: #F9F7D3;
+}
+#sobre-section {
+  background-color: #f0eecf;
+}
+#eventos-section {
+  background-color: #F9F7D3;
+}
+#artesanatos-section {
+  background-color: #f0eecf;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.content-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.content-section p, .content-section ul, .content-section li {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+
+.sobre-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.sobre-text, .sobre-image {
+  flex: 1;
+}
+
+/* --- Animação Simples (Substitui ScrollReveal) --- */
+/* Esconde os elementos por padrão */
+.content-section h1,
+.content-section h2,
+.content-section p,
+.sobre-image,
+.artesanatos-gallery {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Classe que o JS vai adicionar quando a seção estiver visível */
+.content-section.is-visible h1,
+.content-section.is-visible h2,
+.content-section.is-visible p,
+.content-section.is-visible .sobre-image,
+.content-section.is-visible .artesanatos-gallery {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Adiciona um pequeno atraso (delay) entre os elementos */
+.content-section.is-visible p {
+  transition-delay: 0.2s;
+}
+.content-section.is-visible .sobre-image,
+.content-section.is-visible .artesanatos-gallery {
+  transition-delay: 0.3s;
+}
+
+/* --- Galeria de Artesanatos --- */
+.artesanatos-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.gallery-item {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+.gallery-item:hover { transform: translateY(-5px); }
+.gallery-item img { max-width: 100%; height: 120px; object-fit: cover; border-radius: 5px; margin-bottom: 10px; }
+.gallery-item h3 { font-size: 1.1rem; color: #592507; margin: 0; }
+
+/* Modal da Galeria */
+.gallery-modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7); padding-top: 60px; }
+.modal-content { margin: 5% auto; background-color: #fefefe; padding: 20px; border-radius: 10px; width: 80%; max-width: 600px; text-align: center; position: relative; }
+.modal-content img { max-width: 90%; height: auto; max-height: 400px; object-fit: contain; border-radius: 8px; margin-bottom: 15px; }
+.modal-content h3 { color: #592507; font-size: 1.8rem; margin-bottom: 10px; }
+.modal-content p { color: #333; font-size: 1rem; line-height: 1.5; }
+.close-button { color: #aaa; position: absolute; top: 10px; right: 25px; font-size: 35px; font-weight: bold; cursor: pointer; }
+.close-button:hover, .close-button:focus { color: #592507; text-decoration: none; cursor: pointer; }
+
+
+/* --- Footer --- */
+footer {
+  width: 100%;
+  background-color: rgba(153, 121, 88, 1);
+  color: #F9F7D3;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+footer a { color: #F9F7D3; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* --- Media Query para Telas Maiores (Desktop) --- */
+@media (min-width: 900px) {
+  .header {
+    position: sticky;
+  }
+  
+  .navbar {
+    flex-wrap: nowrap;
+    width: 95%;
+    padding: 10px 1.5rem;
+  }
+  
+  .navbar-logo .circle { height: 70px; width: 70px; }
+  #name { font-size: initial; }
+  .navbar-toggler { display: none; }
+
+  .navbar-options {
+    display: flex;
+    position: static;
+    width: auto;
+    background-color: transparent;
+    border-radius: 0;
+  }
+
+  .navbar-options ul {
+    flex-direction: row;
+    padding: 0;
+    gap: 15px;
+    width: auto;
+  }
+
+  .navbar-options ul li {
+    width: auto;
+    background-color: transparent;
+    box-shadow: none;
+    padding: 10px 0;
+  }
+  
+  .navbar-options ul .nav-link {
+    color: #F9F7D3;
+    font-weight: 600;
+  }
+
+  .navbar-options ul li:hover {
+    background-color: transparent;
+  }
+
+  .navbar-options ul li.active {
+    background-color: transparent;
+    font-weight: 700;
+  }
+
+  .active-line {
+      display: block;
+      position: absolute;
+      bottom: -5px;
+      height: 3px;
+      background-color: #F2EB85;
+      transition: width 0.3s ease, left 0.3s ease;
+      opacity: 0;
+      border-radius: 2px;
+  }
+
+  .content-section {
+    padding: 100px 40px;
+  }
+
+  .content-section h1 {
+    font-size: 3.5rem;
+  }
+  
+  .sobre-content-wrapper {
+    flex-direction: row;
+    text-align: left;
+    align-items: center;
+  }
+
+  footer {
+    flex-direction: row;
+    justify-content: center;
+    font-size: 16px;
+    gap: 8px;
+    padding: 15px;
+  }
+
+  .artesanatos-gallery {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
