@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- LÓGICA DO INTERSECTION OBSERVER (PARA NAVBAR E ANIMAÇÃO) ---
+    // --- LÓGICA DO INTERSECTION OBSERVER (APENAS PARA NAVBAR) ---
     const sections = document.querySelectorAll('section[id]');
     
     const observerOptions = {
@@ -39,11 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // 1. ATIVA A ANIMAÇÃO SIMPLES
-                // Adiciona a classe .is-visible na seção que entrou na tela
-                entry.target.classList.add('is-visible');
-
-                // 2. ATIVA O LINK DA NAVBAR
+                // ATIVA O LINK DA NAVBAR
                 const currentSectionId = entry.target.id;
                 navLinks.forEach(link => {
                     link.closest('.nav-item').classList.remove('active');
@@ -53,11 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
             }
-            // Opcional: descomente a linha abaixo se quiser que a animação
-            // aconteça toda vez que rolar para cima e para baixo.
-            // else {
-            //     entry.target.classList.remove('is-visible');
-            // }
         });
     }, observerOptions);
 
@@ -87,10 +78,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Lógica da Galeria de Artesanatos ---
     const galleryItems = [
-        { src: 'img/artesanato1.jpg', alt: 'Arranjo floral natural', title: 'Arranjo floral natural', description: 'Flores secas e sementes que trazem o aconchego da natureza pra sua casa. 🍂' },
-        { src: 'img/artesanato2.jpg', alt: 'Presépio artesanal', title: 'Presépio artesanal', description: 'Peça feita em madeira, símbolo de fé e tradição com toque maranhense. 🙏' },
-        { src: 'img/artesanato3.jpg', alt: 'Brincos artesanais', title: 'Brincos artesanais', description: 'Feitos com madeira e sementes naturais. Leves, sustentáveis e cheios de estilo rústico. 🌿' },
-        { src: 'img/artesanato4.jpg', alt: 'Filtro dos sonhos emoldurado', title: 'Filtro dos sonhos emoldurado', description: 'Protege o ambiente e atrai boas energias com um toque artesanal e natural. ✨' }
+        { src: 'img/artesanato1.jpg', alt: 'Cesta de palha artesanal', title: 'Cesta de Palha', description: 'Cesta tecida à mão com fibras naturais, ideal para decoração ou uso diário.' },
+        { src: 'img/artesanato2.jpg', alt: 'Escultura de madeira rústica', title: 'Escultura em Madeira', description: 'Obra de arte entalhada em madeira rústica, representando a fauna local.' },
+        { src: 'img/artesanato3.jpg', alt: 'Cerâmica pintada à mão', title: 'Vaso de Cerâmica', description: 'Vaso de cerâmica com pintura manual, um toque de arte para seu lar.' },
+        { src: 'img/artesanato4.jpg', alt: 'Bolsa de tecido bordada', title: 'Bolsa Artesanal', description: 'Bolsa exclusiva com bordados feitos à mão, unindo tradição e estilo.' }
     ];
 
     const galleryContainer = document.querySelector('.artesanatos-gallery');
@@ -127,7 +118,5 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.style.display = 'none';
         }
     });
-
-    // O CÓDIGO DO SCROLLREVEAL FOI REMOVIDO DAQUI
 
 });
